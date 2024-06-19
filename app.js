@@ -17,7 +17,6 @@ var documentoRouter = require('./routes/documentacion');
 var transferenciaRouter = require('./routes/transferencia');
 
 app.use(express.json());
-// var clubRouter = require('./routes/');
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/jugadores', jugadoresRouter);

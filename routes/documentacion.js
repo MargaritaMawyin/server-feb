@@ -43,18 +43,18 @@ router.get("/:id/", async (req, res) => {
 
 // POST /documentacion (Create a new documentacion)
 router.post("/", async (req, res) => {
-  //   try {
-  //     const { ficha_sin_firmar, ficha_firmada, foto, ficha_medica } = req.body;
-  //     const nuevaDocumentacion = await models.documentacion.create({
-  //       ficha_sin_firmar:null,
-  //       ficha_firmada:null,
-  //       foto:null,
-  //       ficha_medica:null
-  //     });
-  //     console.log(nuevaDocumentacion)
-  //     res.status(201).json(nuevaDocumentacion);
-  //   } catch (error) {
-  //     res.status(500).json({ error: 'Error creating documentacion', details: error.message });
-  //   }
+    try {
+      const { ficha_sin_firmar, ficha_firmada, foto, ficha_medica } = req.body;
+      const nuevaDocumentacion = await models.documentacion.create({
+        ficha_sin_firmar:null,
+        ficha_firmada:null,
+        foto:null,
+        ficha_medica:null
+      });
+      console.log(nuevaDocumentacion)
+      res.status(201).json(nuevaDocumentacion);
+    } catch (error) {
+      res.status(500).json({ error: 'Error creating documentacion', details: error.message });
+    }
 });
 module.exports = router;

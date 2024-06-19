@@ -1,10 +1,10 @@
 // routes/jugadores.js
 const express = require("express");
 const router = express.Router();
-const { Jugador, Documentacion, Contacto } = require("../models");
-const models = require("../models");
-const { v4: uuidv4 } = require("uuid");
+const sequelize = require('../models/index').sequelize;
+var initModels = require("../models/init-models");
 
+var models =  initModels(sequelize);
 /*  GET */
 router.get("/", async (req, res) => {
   try {
@@ -116,8 +116,7 @@ router.post("/", async (req, res) => {
           // Usar el ID generado por Sequelize
         },
 
-        { transaction: t ,
-          // include: [models.documentacion, models.contacto]
+        { transaction: t ,     // include: [models.documentacion, models.contacto]
         }
       );
      
@@ -134,36 +133,4 @@ router.post("/", async (req, res) => {
   }
 });
 
-
-
-//// otro post
-
-router.post('/2/', async (req, res) => {
-  const {
-    nombres, apellidos, fecha_de_nacimiento, cedula, edad, sexo, nacionalidad,
-    estatura, peso, fecha_de_inscripcion, representante, tipo_de_sangre,
-    posicion, comentario, esLibre,
-    documentacion, contacto
-  } = req.body;
-
-  try {
-    const nuevoJugador = await Jugador.create({
-      nombres, apellidos, fecha_de_nacimiento, cedula, edad, sexo, nacionalidad,
-      estatura, peso, fecha_de_inscripcion, representante, tipo_de_sangre,
-      posicion, comentario, esLibre,
-      documentacion_id: nuevaDocumentacion.documentacion_id,
-        contacto_id: nuevoContacto.contacto_id,
-    }, {
-      include: [
-        { model: models.documentacion }, // Include Documentacion association
-        { model: models.contacto }      // Include Contacto association
-      ]
-    });
-
-    res.status(201).json(nuevoJugador);
-  } catch (error) {
-    console.error("Error al crear el jugador:", error);
-    res.status(500).json({ error: "Error interno del servidor", details: error.message });
-  }
-});
 module.exports = router;
