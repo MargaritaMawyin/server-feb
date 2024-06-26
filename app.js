@@ -9,7 +9,6 @@ const port = process.env.PORT || 3001;
 
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 var jugadoresRouter = require('./routes/jugador');
 var representanteRouter = require('./routes/representante');
 var contactoRouter = require('./routes/contacto');
@@ -18,7 +17,6 @@ var transferenciaRouter = require('./routes/transferencia');
 
 app.use(express.json());
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/jugadores', jugadoresRouter);
 app.use('/representantes', representanteRouter);
 app.use('/transferencias', transferenciaRouter);

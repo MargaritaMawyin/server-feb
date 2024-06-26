@@ -14,15 +14,15 @@ function initModels(sequelize) {
   var torneo = _torneo(sequelize, DataTypes);
   var transferencia = _transferencia(sequelize, DataTypes);
 
-  jugador.belongsTo(contacto, { as: "contacto", foreignKey: "contacto_id"});
+  jugador.belongsTo(contacto, { as: "contacto", foreignKey: "contacto_id",onDelete: "CASCADE"});
   contacto.hasMany(jugador, { as: "jugadors", foreignKey: "contacto_id"});
-  jugador.belongsTo(documentacion, { as: "documentacion", foreignKey: "documentacion_id"});
+  jugador.belongsTo(documentacion, { as: "documentacion", foreignKey: "documentacion_id",onDelete: "CASCADE"});
   documentacion.hasMany(jugador, { as: "jugadors", foreignKey: "documentacion_id"});
-  representante.belongsTo(jugador, { as: "jugador", foreignKey: "jugador_id"});
+  representante.belongsTo(jugador, { as: "jugador", foreignKey: "jugador_id",onDelete: "CASCADE"});
   jugador.hasMany(representante, { as: "representantes", foreignKey: "jugador_id"});
-  torneo.belongsTo(jugador, { as: "jugador", foreignKey: "jugador_id"});
+  torneo.belongsTo(jugador, { as: "jugador", foreignKey: "jugador_id",onDelete: "CASCADE"});
   jugador.hasMany(torneo, { as: "torneos", foreignKey: "jugador_id"});
-  transferencia.belongsTo(jugador, { as: "jugador", foreignKey: "jugador_id"});
+  transferencia.belongsTo(jugador, { as: "jugador", foreignKey: "jugador_id",onDelete: "CASCADE"});
   jugador.hasMany(transferencia, { as: "transferencia", foreignKey: "jugador_id"});
 
   return {

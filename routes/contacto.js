@@ -62,4 +62,33 @@ router.post("/create", async (req, res) => {
   // }
 });
 
+/* PUT */
+router.put("/update/:id", async (req, res) => {
+  
+  const { pais, provincia, ciudad, direccion, telefono } = req.body;
+
+  const camposAActualizar = {};
+  if (pais !== undefined) camposAActualizar.pais = pais;
+  if (provincia !== undefined) camposAActualizar.provincia = provincia;
+  if (ciudad !== undefined) camposAActualizar.ciudad = ciudad;
+  if (direccion !== undefined) camposAActualizar.direccion = direccion;
+  if (telefono !== undefined) camposAActualizar.telefono = telefono;
+  try {
+    // Buscar el contacto por ID
+    const contacto = await models.contacto.findOne({
+      where: { contacto_id: req.params.id },
+    });
+    if (!contacto) {
+      return res.status(404).json({ error: 'Contacto no encontrado' });
+    }
+
+    // Guardar los cambios en la base de datos
+    await contacto.update(camposAActualizar);
+    res.status(200).json(contacto);
+  } catch (error) {
+    console.error('Error al actualizar el contacto:', error);
+    res.status(500).json({ error: 'Error interno del servidor', details: error.message });
+  }
+});
+
 module.exports = router;

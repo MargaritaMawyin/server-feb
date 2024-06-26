@@ -34,11 +34,21 @@ module.exports = function(sequelize, DataTypes) {
     correo: {
       type: DataTypes.STRING(255),
       allowNull: false
-    }
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: Sequelize.NOW,
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: Sequelize.NOW,
+    },
   }, {
     sequelize,
     tableName: 'representante',
-    timestamps: false,
+    timestamps: true,
     indexes: [
       {
         name: "PRIMARY",
