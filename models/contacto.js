@@ -1,4 +1,4 @@
- const Sequelize = require('sequelize');
+const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('contacto', {
     contacto_id: {
@@ -26,18 +26,7 @@ module.exports = function(sequelize, DataTypes) {
     telefono: {
       type: DataTypes.STRING(15),
       allowNull: false
-    },
-    createdAt: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: Sequelize.NOW,
-    },
-    updatedAt: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: Sequelize.NOW,
-    },
-    
+    }
   }, {
     sequelize,
     tableName: 'contacto',

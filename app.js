@@ -14,6 +14,7 @@ var representanteRouter = require('./routes/representante');
 var contactoRouter = require('./routes/contacto');
 var documentoRouter = require('./routes/documentacion');
 var transferenciaRouter = require('./routes/transferencia');
+var clubRouter = require('./routes/club');
 
 app.use(express.json());
 app.use('/', indexRouter);
@@ -22,6 +23,7 @@ app.use('/representantes', representanteRouter);
 app.use('/transferencias', transferenciaRouter);
 app.use('/contactos', contactoRouter);
 app.use('/documentacion', documentoRouter);
+app.use('/club', clubRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

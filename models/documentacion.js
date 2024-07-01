@@ -26,17 +26,7 @@ module.exports = function(sequelize, DataTypes) {
     autorizacion_representante: {
       type: DataTypes.BLOB,
       allowNull: true
-    },
-    createdAt: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: Sequelize.NOW,
-    },
-    updatedAt: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: Sequelize.NOW,
-    },
+    }
   }, {
     sequelize,
     tableName: 'documentacion',

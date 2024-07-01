@@ -7,8 +7,6 @@ var initModels = require("../models/init-models");
 
 var models = initModels(sequelize);
 
-/* GET users listing. */
-
 /*  GET */
 
 router.get("/", async (req, res) => {
@@ -31,8 +29,30 @@ router.get("/", async (req, res) => {
 });
 
 /*  GET por ID*/
-// Manejar la solicitud GET para obtener un contacto por su ID
-router.get("/:id", (req, res) => {});
+
+router.get("/:id", async (req, res) => {
+  try {
+    const representante = await models.representante.findOne({
+      where: { representante_id: req.params.id },
+      include: [
+        {
+          model: models.jugador,
+          as: "jugador",
+        },
+      ],
+    });
+
+    if (representante) {
+      res.json(representante);
+    } else {
+      res.status(404).json({ error: "representante no encontrado" });
+    }
+  } catch (err) {
+    res
+      .status(500)
+      .json({ error: "Error interno del servidor", details: err.message });
+  }
+});
 
 /*  POST */
 router.post("/create", async (req, res) => {

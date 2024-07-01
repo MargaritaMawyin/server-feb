@@ -18,7 +18,11 @@ router.get("/", async (req, res) => {
       {
         model: models.documentacion,
         as: "documentacion", // Alias para el modelo asociado (definido en la asociación)
-      } ],
+      } ,
+      {
+        model: models.club,
+        as: "club", // Alias para el modelo asociado (definido en la asociación)
+      }],
     });
 
 
@@ -41,6 +45,10 @@ router.get("/:id", async (req, res) => {
       {
         model: models.documentacion,
         as: "documentacion", // Alias para el modelo asociado (definido en la asociación)
+      },
+      {
+        model: models.club,
+        as: "club", // Alias para el modelo asociado (definido en la asociación)
       } ],
     });
 
@@ -59,6 +67,7 @@ router.get("/:id", async (req, res) => {
 // POST
 router.post("/create", async (req, res) => {
   const {
+    club,
     documentacion,
     contacto,
     nombre_club,
@@ -87,6 +96,11 @@ router.post("/create", async (req, res) => {
       // Crear el registro de Documentacion
       const nuevaDocumentacion = await db.documentacion.create(
         documentacion,
+        { transaction: t }
+      );
+      // Crear el registro de CLub
+      const nuevoClub = await db.club.create(
+        club,
         { transaction: t }
       );
 
@@ -118,6 +132,7 @@ router.post("/create", async (req, res) => {
           licencia,
           documentacion_id: nuevaDocumentacion.documentacion_id,
           contacto_id: nuevoContacto.contacto_id,
+          club_id: nuevoClub.club_id,
         },
 
         { transaction: t ,  
